@@ -1,16 +1,15 @@
-// login.dart
+// signup.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'signup.dart'; // Import the SignUpScreen
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: Text('Sign Up'),
       ),
       body: Center(
         child: Card(
@@ -18,25 +17,25 @@ class LoginScreen extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
           ),
-          color: Colors.blue,
+          color: Colors.green, // Change the background color
           child: Padding(
             padding: EdgeInsets.all(16.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'Login Page',
+                  'Sign Up Page',
                   style: TextStyle(
                     fontSize: 24.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 SizedBox(height: 16.0),
-                // Add your login form or content here
-                // For example, you can add text fields for username and password
+                // Add your sign-up form or content here
+                // For example, you can add text fields for email and password
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText: 'Username',
+                    labelText: 'Email',
                   ),
                 ),
                 SizedBox(height: 8.0),
@@ -52,22 +51,28 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        Get.toNamed('/home');
+                        // Handle sign-up logic here
+                        // You can navigate to the home page or perform any other actions
+                        // For simplicity, let's show a snackbar for now
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Sign Up Button Pressed'),
+                          ),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.orange, // Change the login button color
+                        primary: Colors.green, // Keep the sign-up button color
                       ),
-                      child: Text('Login'),
+                      child: Text('Sign Up'),
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        // Navigate to the sign-up page when the button is pressed
-                        Get.to(SignUpScreen());
+                        Get.toNamed('/login'); // Navigate to the login page
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.green, // Change the sign-up button color
+                        primary: Colors.blue, // Change the login button color
                       ),
-                      child: Text('Sign Up'),
+                      child: Text('Login'),
                     ),
                   ],
                 ),

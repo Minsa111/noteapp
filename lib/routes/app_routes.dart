@@ -10,4 +10,3 @@ abstract class _Paths {
   static const HOME = '/home';
 }
 
-
