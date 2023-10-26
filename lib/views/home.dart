@@ -1,0 +1,115 @@
+
+import 'dart:math';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:noteapp/constants/colors.dart';
+import 'package:noteapp/models/navbar.dart';
+import 'package:noteapp/controller/note.dart';
+import 'package:noteapp/controller/link.dart';
+import 'package:noteapp/models/card.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+getRandomColor(){
+  Random random = Random();
+  return backgroundColors[random.nextInt(backgroundColors.length)];
+}
+
+  @override
+  Widget build(BuildContext context) {
+    
+    return Scaffold(
+      
+      backgroundColor: Color.fromARGB(255, 26, 26, 26),
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(16,32,16,0),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Notes', style: TextStyle(fontSize: 30, color: Colors.white),),
+                IconButton(
+                  onPressed:(){}, 
+                  padding: EdgeInsets.all(0),
+                  icon: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(color: Colors.grey.withOpacity(.2),
+                      borderRadius: BorderRadius.circular(10)
+                    ),
+                  child: Icon(Icons.apps_rounded, color: Colors.white,)
+                  )
+                )
+              ],
+            ),
+            SizedBox(height: 10,),
+
+SingleChildScrollView(
+  scrollDirection: Axis.horizontal,
+  child: Row(
+    children: sampleNavbar.map((navbar) {
+      return Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20), // Rounded corners
+          color: Color.fromARGB(255, 69, 69, 69), // Background color
+        ),
+        height: 50, // Adjust the height as needed
+        width: 100, // Adjust the width as needed
+        margin: EdgeInsets.all(5),
+        child: Center(
+          child: Text(
+            '${navbar.content}',
+            style: TextStyle(color: Colors.white, fontSize: 18),
+          ),
+        ),
+      );
+    }).toList(),
+  ),
+),
+            // TextField(
+            //   style: TextStyle(fontSize: 16, color: Colors.white),
+            //   decoration: InputDecoration(
+            //     contentPadding: EdgeInsets.symmetric(vertical: 12),
+            //     hintText: "Search Notes...",
+            //     hintStyle: TextStyle(color: Colors.grey),
+            //     prefixIcon: const Icon(
+            //       Icons.search,
+            //       color: Colors.grey
+            //     ),
+            //     fillColor: Colors.grey.shade800,
+            //     filled: true,
+            //     focusedBorder: OutlineInputBorder(
+            //       borderRadius: BorderRadius.circular(100),
+            //       borderSide: const BorderSide(color: Colors.transparent)
+            //       ),
+            //     enabledBorder: OutlineInputBorder(
+            //       borderRadius: BorderRadius.circular(100),
+            //       borderSide: const BorderSide(color: Colors.transparent)
+            //       )
+            //   ),
+            // ), Scrapped idea
+
+            Expanded(child: 
+              ListView.builder(
+                padding: EdgeInsets.only(top:15),
+                itemCount: sampleNotes.length,
+                itemBuilder: (context, index){
+                return cardDesign(index);
+              },
+            ))
+          ],
+        ),
+      ),
+      floatingActionButton: editButton(context),
+    );
+  }  
+}
