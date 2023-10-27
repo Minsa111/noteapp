@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:noteapp/controller/note.dart';
+import 'package:noteapp/models/note.dart';
 import 'package:noteapp/constants/colors.dart';
 
 class MyWidget extends StatefulWidget {
