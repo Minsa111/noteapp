@@ -52,7 +52,7 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        Get.toNamed('/home');
+                        Get.offAndToNamed('/home');
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.orange, // Change the login button color
@@ -62,7 +62,7 @@ class LoginScreen extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {
                         // Navigate to the sign-up page when the button is pressed
-                        Get.to(SignUpScreen());
+                        Get.to(()=>SignUpScreen());
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.green, // Change the sign-up button color

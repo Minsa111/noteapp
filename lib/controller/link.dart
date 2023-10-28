@@ -34,7 +34,7 @@ class _editbuttonState extends State<editbutton>
 
 FloatingActionButton editButton(BuildContext context) {
   return FloatingActionButton(
-    onPressed: () =>Get.to(EditScreen()),
+    onPressed: () =>Get.toNamed('/edit'),
     elevation: 5,
     backgroundColor: Colors.grey.shade800,
     child: const Icon(
@@ -65,7 +65,7 @@ FloatingActionButton checkButton() {
 
 FloatingActionButton backHome(BuildContext context) {
   return FloatingActionButton(
-    onPressed: ()=>Get.to(HomeScreen()),
+    onPressed: ()=>Get.back(),
     elevation: 8, // Add elevation here
     backgroundColor: Colors.transparent,
     child: Container(

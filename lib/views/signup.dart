@@ -67,7 +67,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        Get.toNamed('/login'); // Navigate to the login page
+                        Get.back(); // Navigate to the login page
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.blue, // Change the login button color
