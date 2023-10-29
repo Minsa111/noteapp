@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:get/get.dart';
 import 'package:noteapp/constants/colors.dart';
 import 'package:noteapp/models/navbar.dart';
 import 'package:noteapp/models/note.dart';
@@ -38,7 +39,7 @@ getRandomColor(){
               children: [
                 Text('Notes', style: TextStyle(fontSize: 30, color: Colors.white),),
                 IconButton(
-                  onPressed:(){}, 
+                  onPressed: () =>Get.toNamed('/web'),
                   padding: EdgeInsets.all(0),
                   icon: Container(
                     width: 40,
@@ -46,7 +47,7 @@ getRandomColor(){
                     decoration: BoxDecoration(color: Colors.grey.withOpacity(.2),
                       borderRadius: BorderRadius.circular(10)
                     ),
-                  child: Icon(Icons.apps_rounded, color: Colors.white,)
+                  child: Icon(Icons.smart_display_rounded, color: Colors.white,)
                   )
                 )
               ],

@@ -1,8 +1,6 @@
 
 import 'package:get/get.dart';
-import 'package:noteapp/views/home.dart';
 import 'package:flutter/material.dart';
-import 'package:noteapp/views/edit.dart';
 class editbutton extends StatefulWidget {
   const editbutton({super.key});
 
