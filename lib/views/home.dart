@@ -1,7 +1,8 @@
-// ignore_for_file: unnecessary_import, prefer_const_constructors
+// ignore_for_file: unnecessary_import, prefer_const_constructors, avoid_print, unused_element
 
 import 'dart:math';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
@@ -25,6 +26,19 @@ class _HomeScreenState extends State<HomeScreen> {
     return backgroundColors[random.nextInt(backgroundColors.length)];
   }
 
+  void _handleLogout() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      Get.offAllNamed('/login');
+    } catch (error) {
+      print("Error during logout: $error");
+      Get.snackbar("Error", "Failed to logout",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red.withOpacity(0.1),
+          colorText: Colors.red);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,8 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Row(
                       children: [
                         IconButton(
-                          onPressed: () => Get.toNamed(
-                              '/web'), // Ganti /web1 sesuai dengan rute yang sesuai
+                          onPressed: _handleLogout,
                           padding: EdgeInsets.all(0),
                           icon: Container(
                             width: 40,
@@ -62,8 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         IconButton(
-                          onPressed: () => Get.toNamed(
-                              '/web'), // Ganti /web2 sesuai dengan rute yang sesuai
+                          onPressed: () => Get.toNamed('/web'),
                           padding: EdgeInsets.all(0),
                           icon: Container(
                             width: 40,
