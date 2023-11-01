@@ -1,7 +1,8 @@
-// ignore_for_file: unnecessary_import
+// ignore_for_file: unnecessary_import, prefer_const_constructors, avoid_print, unused_element
 
 import 'dart:math';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
@@ -25,6 +26,19 @@ class _HomeScreenState extends State<HomeScreen> {
     return backgroundColors[random.nextInt(backgroundColors.length)];
   }
 
+  void _handleLogout() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      Get.offAllNamed('/login');
+    } catch (error) {
+      print("Error during logout: $error");
+      Get.snackbar("Error", "Failed to logout",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red.withOpacity(0.1),
+          colorText: Colors.red);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,26 +47,53 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: const EdgeInsets.fromLTRB(16, 32, 16, 0),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Column(
               children: [
-                Text(
-                  'Notes',
-                  style: TextStyle(fontSize: 30, color: Colors.white),
-                ),
-                IconButton(
-                    onPressed: () => Get.toNamed('/web'),
-                    padding: EdgeInsets.all(0),
-                    icon: Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                            color: Colors.grey.withOpacity(.2),
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Icon(
-                          Icons.smart_display_rounded,
-                          color: Colors.white,
-                        )))
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Notes',
+                      style: TextStyle(fontSize: 30, color: Colors.white),
+                    ),
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: _handleLogout,
+                          padding: EdgeInsets.all(0),
+                          icon: Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(.2),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Icon(
+                              Icons.logout,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () => Get.toNamed('/web'),
+                          padding: EdgeInsets.all(0),
+                          icon: Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(.2),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Icon(
+                              Icons.smart_display_rounded,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                )
               ],
             ),
             SizedBox(

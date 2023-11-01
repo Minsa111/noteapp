@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 part of 'app_pages.dart';
 
 abstract class Routes {
@@ -13,4 +15,3 @@ abstract class _Paths {
   static const EDIT = '/edit';
   static const TUTORWEB = '/web';
 }
-
