@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_import
+// ignore_for_file: unnecessary_import, prefer_const_constructors
 
 import 'dart:math';
 
@@ -33,26 +33,55 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: const EdgeInsets.fromLTRB(16, 32, 16, 0),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Column(
               children: [
-                Text(
-                  'Notes',
-                  style: TextStyle(fontSize: 30, color: Colors.white),
-                ),
-                IconButton(
-                    onPressed: () => Get.toNamed('/web'),
-                    padding: EdgeInsets.all(0),
-                    icon: Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                            color: Colors.grey.withOpacity(.2),
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Icon(
-                          Icons.smart_display_rounded,
-                          color: Colors.white,
-                        )))
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Notes',
+                      style: TextStyle(fontSize: 30, color: Colors.white),
+                    ),
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () => Get.toNamed(
+                              '/web'), // Ganti /web1 sesuai dengan rute yang sesuai
+                          padding: EdgeInsets.all(0),
+                          icon: Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(.2),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Icon(
+                              Icons.logout,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () => Get.toNamed(
+                              '/web'), // Ganti /web2 sesuai dengan rute yang sesuai
+                          padding: EdgeInsets.all(0),
+                          icon: Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(.2),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Icon(
+                              Icons.smart_display_rounded,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                )
               ],
             ),
             SizedBox(
