@@ -3,7 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:noteapp/controller/signincontroller.dart';
+import 'package:noteapp/controller/authcontroller.dart';
 import 'signup.dart'; // Import the SignUpScreen
 
 class LoginScreen extends StatelessWidget {
@@ -13,7 +13,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
-    final SignInController _auth = SignInController();
+    final AuthsController _authController = Get.find();
 
     void _handleSignIn() async {
       final email = emailController.text;
@@ -28,7 +28,7 @@ class LoginScreen extends StatelessWidget {
       }
 
       final loginSuccessful =
-          await _auth.signInWithEmailAndPassword(email, password);
+          await _authController.signInWithCredentials(email, password);
 
       if (loginSuccessful) {
         Get.offAndToNamed('/home');

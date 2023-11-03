@@ -2,12 +2,11 @@
 
 import 'dart:math';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:noteapp/constants/colors.dart';
-import 'package:noteapp/controller/datacontroller.dart';
+import 'package:noteapp/controller/authcontroller.dart';
 import 'package:noteapp/models/navbar.dart';
 import 'package:noteapp/controller/link.dart';
 import 'package:noteapp/models/card.dart';
@@ -20,23 +19,45 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final NoteController noteController = Get.find();
+  final AuthsController _authController = Get.find();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _authController.refreshNotes();
+    });
+  }
+
+  Widget buildNotesList() {
+    return Obx(
+      () => Expanded(
+        child: RefreshIndicator(
+          onRefresh: () async {
+            await Future.delayed(
+              const Duration(seconds: 2),
+            );
+            _authController.refreshNotes();
+          },
+          child: _authController.notes.isEmpty
+              ? Center(
+                  child:
+                      CircularProgressIndicator()) // Menampilkan indikator loading jika data kosong.
+              : ListView.builder(
+                  padding: EdgeInsets.only(top: 15),
+                  itemCount: _authController.notes.length,
+                  itemBuilder: (context, index) {
+                    return cardDesign(_authController.notes[index]);
+                  },
+                ),
+        ),
+      ),
+    );
+  }
+
   getRandomColor() {
     Random random = Random();
     return backgroundColors[random.nextInt(backgroundColors.length)];
-  }
-
-  void _handleLogout() async {
-    try {
-      await FirebaseAuth.instance.signOut();
-      Get.offAllNamed('/login');
-    } catch (error) {
-      print("Error during logout: $error");
-      Get.snackbar("Error", "Failed to logout",
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red.withOpacity(0.1),
-          colorText: Colors.red);
-    }
   }
 
   @override
@@ -59,7 +80,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     Row(
                       children: [
                         IconButton(
-                          onPressed: _handleLogout,
+                          onPressed: () {
+                            _authController.logOut();
+                          },
                           padding: EdgeInsets.all(0),
                           icon: Container(
                             width: 40,
@@ -146,15 +169,28 @@ class _HomeScreenState extends State<HomeScreen> {
             //       )
             //   ),
             // ), Scrapped idea
-
-            Expanded(
-                child: ListView.builder(
-              padding: EdgeInsets.only(top: 15),
-              itemCount: noteController.notes.length,
-              itemBuilder: (context, index) {
-                return cardDesign(noteController.notes[index]);
-              },
-            ))
+            // RefreshIndicator(
+            //     onRefresh: _refreshNotes,
+            //     child: Obx(() {
+            //       return ListView.builder(
+            //           itemCount: _authController.notes.length,
+            //           itemBuilder: (context, index) {
+            //             return cardDesign(_authController.notes[index]);
+            //           });
+            //     }))
+            buildNotesList()
+            // RefreshIndicator(
+            //   onRefresh: () async {
+            //     await _refreshNotes();
+            //   },
+            //   child: ListView.builder(
+            //     padding: EdgeInsets.only(top: 15),
+            //     itemCount: _authController.notes.length,
+            //     itemBuilder: (context, index) {
+            //       return cardDesign(_authController.notes[index]);
+            //     },
+            //   ),
+            // )
           ],
         ),
       ),
