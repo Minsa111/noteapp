@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:noteapp/controller/datacontroller.dart';
-import 'package:noteapp/controller/signincontroller.dart';
-import 'package:noteapp/controller/signupcontroller.dart';
+import 'package:noteapp/controller/authcontroller.dart';
 import 'package:noteapp/routes/app_pages.dart';
 import 'package:noteapp/controller/image.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +18,5 @@ void main() async {
     ),
   );
   Get.put(ImagePickerController());
-  Get.put(NoteController());
-  Get.put(SignUpController());
-  Get.put(SignInController());
+  Get.put(AuthsController());
 }

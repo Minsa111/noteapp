@@ -3,7 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:noteapp/controller/signupcontroller.dart';
+import 'package:noteapp/controller/authcontroller.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -12,7 +12,7 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
-    final SignUpController _auth = SignUpController();
+    final AuthsController _auth = Get.find();
 
     void _handleSignUp() async {
       String email = emailController.text;
