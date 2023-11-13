@@ -48,7 +48,9 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Login'),
+        backgroundColor:Colors.grey.shade800,
       ),
+      backgroundColor: const Color.fromARGB(255, 23, 23, 23),
       body: Center(
         child: Card(
           margin: EdgeInsets.all(20.0),
@@ -64,6 +66,7 @@ class LoginScreen extends StatelessWidget {
                 Text(
                   'Login Page',
                   style: TextStyle(
+                    color: Colors.white,
                     fontSize: 24.0,
                     fontWeight: FontWeight.bold,
                   ),
@@ -72,15 +75,46 @@ class LoginScreen extends StatelessWidget {
                 TextFormField(
                   controller: emailController,
                   decoration: InputDecoration(
-                    labelText: 'Username',
+                    labelText: 'Email',
+                    hintText:'Insert Email',
+                    filled: true,
+                    fillColor: Colors.blue.shade600,
+                    labelStyle: TextStyle(color: Colors.white),
+                    hintStyle: TextStyle(color: Colors.white54),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: const BorderSide(color: Colors.black38),
+                      
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: const BorderSide(color: Colors.transparent)
+                    )
+                    
                   ),
+                  style: TextStyle(color: Colors.white),
                 ),
                 SizedBox(height: 8.0),
                 TextFormField(
                   controller: passwordController,
                   decoration: InputDecoration(
                     labelText: 'Password',
+                    hintText: 'Insert Password',
+                    filled: true,
+                    hintStyle: TextStyle(color: Colors.white54),
+                    labelStyle: TextStyle(color: Colors.white),
+                    fillColor: Colors.blue.shade600,
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: const BorderSide(color: Colors.black38),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: const BorderSide(color: Colors.transparent)
+                    )
+                    
                   ),
+                  style: TextStyle(color: Colors.white),
                   obscureText: true,
                 ),
                 SizedBox(height: 16.0),
@@ -90,7 +124,7 @@ class LoginScreen extends StatelessWidget {
                     ElevatedButton(
                       onPressed: _handleSignIn,
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.orange, // Change the login button color
+                        primary: Colors.grey.shade800,
                       ),
                       child: Text('Login'),
                     ),
