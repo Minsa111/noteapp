@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:noteapp/views/edit.dart';
 import 'package:noteapp/views/home.dart';
 import 'package:noteapp/views/login.dart';
+import 'package:noteapp/views/splash.dart';
 import 'package:noteapp/views/webview.dart';
 
 part 'app_routes.dart';
@@ -11,8 +12,8 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  // Change INITIAL to point to the login route
-  static const INITIAL = Routes.LOGIN;
+  // Change INITIAL to point to the splash screen route
+  static const INITIAL = Routes.SPLASH;
 
   static final routes = [
     GetPage(
@@ -31,7 +32,10 @@ class AppPages {
       name: _Paths.TUTORWEB,
       page: () => const TutorWebScreen(),
     ),
+    GetPage(
+      // Update to include the splash route
+      name: _Paths.SPLASH,
+      page: () => const SplashScreen(),
+    ),
   ];
 }
-
-// ...
