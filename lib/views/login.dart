@@ -136,7 +136,7 @@ void sendCampaignNotification(String campaignTopic, String message) async {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ElevatedButton(
-                      onPressed:()=>sendCampaignNotification("myself","sent?"),
+                      onPressed:_handleSignIn,
                       style: ElevatedButton.styleFrom(
                         primary: Colors.grey.shade800,
                       ),
