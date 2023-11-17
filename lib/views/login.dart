@@ -1,6 +1,7 @@
 // login.dart
 // ignore_for_file: prefer_const_constructors, no_leading_underscores_for_local_identifiers
 //test
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:noteapp/controller/authcontroller.dart';
@@ -14,7 +15,20 @@ class LoginScreen extends StatelessWidget {
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
     final AuthsController _authController = Get.find();
+Future<void> _subscribeToTopic(String topic) async {
+  await FirebaseMessaging.instance.subscribeToTopic(topic);
+}
 
+void sendCampaignNotification(String campaignTopic, String message) async {
+  try {
+    String? fcmToken = await FirebaseMessaging.instance.getToken();
+    print('FCM Token: $fcmToken');
+    await _subscribeToTopic(campaignTopic);
+    print('Simulating campaign notification: $message');
+  } catch (e) {
+    print('Error subscribing to topic or sending campaign notification: $e');
+  }
+}
     void _handleSignIn() async {
       final email = emailController.text;
       final password = passwordController.text;
@@ -47,7 +61,7 @@ class LoginScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: Text('Logissn'),
         backgroundColor:Colors.grey.shade800,
       ),
       backgroundColor: const Color.fromARGB(255, 23, 23, 23),
@@ -122,7 +136,7 @@ class LoginScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ElevatedButton(
-                      onPressed: _handleSignIn,
+                      onPressed:()=>sendCampaignNotification("myself","sent?"),
                       style: ElevatedButton.styleFrom(
                         primary: Colors.grey.shade800,
                       ),

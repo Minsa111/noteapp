@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:noteapp/controller/authcontroller.dart';
+import 'package:noteapp/controller/notifcontroller.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -34,6 +35,7 @@ class SignUpScreen extends StatelessWidget {
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: Colors.green.withOpacity(0.1),
             colorText: Colors.green);
+            
       } else {
         Get.snackbar("Error", "Failed to create account. Try again",
             snackPosition: SnackPosition.BOTTOM,
