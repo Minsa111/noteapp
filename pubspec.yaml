@@ -36,7 +36,7 @@ dependencies:
   webview_flutter: ^2.0.12
   firebase_core: ^2.20.0
   cloud_firestore: ^4.12.1
-  firebase_messaging: ^14.6.6
+  firebase_messaging: ^14.7.6
   shared_preferences: ^2.2.0
   flutter_local_notifications: ^15.1.0+1
 
@@ -45,6 +45,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_auth: ^4.12.1
   get_storage: ^2.1.1
+  appwrite: ^11.0.1
 
 dev_dependencies:
   flutter_test:

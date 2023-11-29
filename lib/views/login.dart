@@ -4,7 +4,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:noteapp/controller/authcontroller.dart';
+import 'package:noteapp/controller/appwritecontroller.dart';
 import 'signup.dart'; // Import the SignUpScreen
 
 class LoginScreen extends StatelessWidget {
@@ -14,6 +14,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
+    final AppWriteAuthController _authController = Get.find();
     final AuthsController _authController = Get.find();
 Future<void> _subscribeToTopic(String topic) async {
   await FirebaseMessaging.instance.subscribeToTopic(topic);
@@ -41,8 +42,7 @@ void sendCampaignNotification(String campaignTopic, String message) async {
         return;
       }
 
-      final loginSuccessful =
-          await _authController.signInWithCredentials(email, password);
+      final loginSuccessful = await _authController.signIn(email, password);
 
       if (loginSuccessful) {
         Get.offAndToNamed('/home');
@@ -138,6 +138,8 @@ void sendCampaignNotification(String campaignTopic, String message) async {
                     ElevatedButton(
                       onPressed:_handleSignIn,
                       style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            Colors.orange, // Change the login button color
                         primary: Colors.grey.shade800,
                       ),
                       child: Text('Login'),
@@ -148,7 +150,7 @@ void sendCampaignNotification(String campaignTopic, String message) async {
                         Get.to(() => SignUpScreen());
                       },
                       style: ElevatedButton.styleFrom(
-                        primary:
+                        backgroundColor:
                             Colors.green, // Change the sign-up button color
                       ),
                       child: Text('Sign Up'),

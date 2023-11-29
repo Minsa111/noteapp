@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:noteapp/constants/colors.dart';
+import 'package:noteapp/controller/appwritecontroller.dart';
 import 'package:noteapp/controller/authcontroller.dart';
 import 'package:noteapp/models/navbar.dart';
 import 'package:noteapp/controller/link.dart';
@@ -20,6 +21,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final AuthsController _authController = Get.find();
+  final AppWriteAuthController _authControllers = Get.find();
 
   @override
   void initState() {
@@ -82,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         IconButton(
                           onPressed: () {
-                            _authController.logOut();
+                            _authControllers.signOut();
                           },
                           padding: EdgeInsets.all(0),
                           icon: Container(
@@ -161,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     margin: EdgeInsets.all(5),
                     child: Center(
                       child: Text(
-                        '${navbar.content}',
+                        navbar.content,
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
