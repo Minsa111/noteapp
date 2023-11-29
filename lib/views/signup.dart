@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:noteapp/controller/appwritecontroller.dart';
 import 'package:noteapp/controller/authcontroller.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -12,7 +13,7 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
-    final AuthsController _auth = Get.find();
+    final AppWriteAuthController _auth = Get.find();
 
     void _handleSignUp() async {
       String email = emailController.text;
@@ -26,8 +27,7 @@ class SignUpScreen extends StatelessWidget {
         return;
       }
 
-      final signUpSuccessful =
-          await _auth.signUpWithEmailAndPassword(email, password);
+      final signUpSuccessful = await _auth.signUp(email, password);
 
       if (signUpSuccessful) {
         Get.snackbar("Success", "Account has been created",
@@ -89,7 +89,8 @@ class SignUpScreen extends StatelessWidget {
                     ElevatedButton(
                       onPressed: _handleSignUp,
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.green, // Keep the sign-up button color
+                        backgroundColor:
+                            Colors.green, // Keep the sign-up button color
                       ),
                       child: Text('Sign Up'),
                     ),
@@ -98,7 +99,8 @@ class SignUpScreen extends StatelessWidget {
                         Get.back(); // Navigate to the login page
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.blue, // Change the login button color
+                        backgroundColor:
+                            Colors.blue, // Change the login button color
                       ),
                       child: Text('Login'),
                     ),
