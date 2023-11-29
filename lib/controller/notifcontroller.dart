@@ -8,8 +8,6 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 }
 
 class FirebaseMessagingHandler {
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
-
   final _androidChannel = const AndroidNotificationChannel(
     'channel_notification',
     'High Importance Notification',
@@ -70,6 +68,7 @@ class FirebaseMessagingHandler {
     await _localNotification.initialize(settings);
   }
 
+
 // Future<void> _subscribeToTopic(String topic) async {
 //   await FirebaseMessaging.instance.subscribeToTopic(topic);
 // }
@@ -82,4 +81,3 @@ class FirebaseMessagingHandler {
 //     print('Error subscribing to topic or sending campaign notification: $e');
 //   }
 // } failed automatic onPressed notification pls send help(
-}

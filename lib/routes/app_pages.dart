@@ -11,7 +11,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  // Change INITIAL to point to the login route
+  // Change INITIAL to point to the splash screen route
   static const INITIAL = Routes.LOGIN;
 
   static final routes = [
@@ -30,8 +30,6 @@ class AppPages {
     GetPage(
       name: _Paths.TUTORWEB,
       page: () => const TutorWebScreen(),
-    ),
+    )
   ];
 }
-
-// ...
