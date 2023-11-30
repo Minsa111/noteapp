@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:noteapp/controller/appwritecontroller.dart';
+import 'package:noteapp/controller/authcontroller.dart';
 import 'package:noteapp/controller/notifcontroller.dart';
 import 'package:noteapp/firebase_options.dart';
 import 'package:noteapp/routes/app_pages.dart';
@@ -33,6 +34,6 @@ void main() async {
   );
 
   Get.put(ImagePickerController());
-  // Get.put(AuthsController());
+  Get.put(AuthsController());
   Get.put(AppWriteAuthController());
 }

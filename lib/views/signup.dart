@@ -4,7 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:noteapp/controller/appwritecontroller.dart';
-import 'package:noteapp/controller/authcontroller.dart';
+import 'package:noteapp/controller/notifcontroller.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -45,7 +45,9 @@ class SignUpScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Sign Up'),
+        backgroundColor: Colors.grey.shade800,
       ),
+      backgroundColor: const Color.fromARGB(255, 23, 23, 23),
       body: Center(
         child: Card(
           margin: EdgeInsets.all(20.0),
@@ -61,9 +63,9 @@ class SignUpScreen extends StatelessWidget {
                 Text(
                   'Sign Up Page',
                   style: TextStyle(
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
                 SizedBox(height: 16.0),
                 // Add your sign-up form or content here
@@ -71,29 +73,47 @@ class SignUpScreen extends StatelessWidget {
                 TextFormField(
                   controller: emailController,
                   decoration: InputDecoration(
-                    labelText: 'Email',
-                  ),
+                      labelText: 'Email',
+                      hintText: 'Insert Email',
+                      filled: true,
+                      fillColor: Colors.green.shade600,
+                      labelStyle: TextStyle(color: Colors.white),
+                      hintStyle: TextStyle(color: Colors.white54),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: const BorderSide(color: Colors.black38),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide:
+                              const BorderSide(color: Colors.transparent))),
+                  style: TextStyle(color: Colors.white),
                 ),
                 SizedBox(height: 8.0),
                 TextFormField(
                   controller: passwordController,
                   decoration: InputDecoration(
-                    labelText: 'Password',
-                  ),
+                      labelText: 'Password',
+                      hintText: 'Insert Password',
+                      filled: true,
+                      fillColor: Colors.green.shade600,
+                      hintStyle: TextStyle(color: Colors.white54),
+                      labelStyle: TextStyle(color: Colors.white),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: const BorderSide(color: Colors.black38),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide:
+                              const BorderSide(color: Colors.transparent))),
+                  style: TextStyle(color: Colors.white),
                   obscureText: true,
                 ),
                 SizedBox(height: 16.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    ElevatedButton(
-                      onPressed: _handleSignUp,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            Colors.green, // Keep the sign-up button color
-                      ),
-                      child: Text('Sign Up'),
-                    ),
                     ElevatedButton(
                       onPressed: () {
                         Get.back(); // Navigate to the login page
@@ -103,6 +123,13 @@ class SignUpScreen extends StatelessWidget {
                             Colors.blue, // Change the login button color
                       ),
                       child: Text('Login'),
+                    ),
+                    ElevatedButton(
+                      onPressed: _handleSignUp,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.grey.shade800,
+                      ),
+                      child: Text('Sign Up'),
                     ),
                   ],
                 ),
