@@ -19,18 +19,6 @@ class LoginScreen extends StatelessWidget {
       await FirebaseMessaging.instance.subscribeToTopic(topic);
     }
 
-    void sendCampaignNotification(String campaignTopic, String message) async {
-      try {
-        String? fcmToken = await FirebaseMessaging.instance.getToken();
-        print('FCM Token: $fcmToken');
-        await _subscribeToTopic(campaignTopic);
-        print('Simulating campaign notification: $message');
-      } catch (e) {
-        print(
-            'Error subscribing to topic or sending campaign notification: $e');
-      }
-    }
-
     void _handleSignIn() async {
       final email = emailController.text;
       final password = passwordController.text;

@@ -17,6 +17,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "11.0.1"
+>>>>>>>>> Temporary merge branch 2
   args:
     dependency: transitive
     description:
@@ -289,6 +290,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.5.15"
+>>>>>>>>> Temporary merge branch 2
   flutter:
     dependency: "direct main"
     description: flutter
