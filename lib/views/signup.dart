@@ -4,7 +4,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:noteapp/controller/appwritecontroller.dart';
-import 'package:noteapp/controller/authcontroller.dart';
 import 'package:noteapp/controller/notifcontroller.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -35,7 +34,6 @@ class SignUpScreen extends StatelessWidget {
             snackPosition: SnackPosition.BOTTOM,
             backgroundColor: Colors.green.withOpacity(0.1),
             colorText: Colors.green);
-            
       } else {
         Get.snackbar("Error", "Failed to create account. Try again",
             snackPosition: SnackPosition.BOTTOM,
@@ -46,7 +44,7 @@ class SignUpScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign Up'),
+        title: Text('Sign Up Page'),
         backgroundColor: Colors.grey.shade800,
       ),
       backgroundColor: const Color.fromARGB(255, 23, 23, 23),
@@ -65,56 +63,51 @@ class SignUpScreen extends StatelessWidget {
                 Text(
                   'Sign Up Page',
                   style: TextStyle(
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white
-                  ),
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
                 SizedBox(height: 16.0),
                 // Add your sign-up form or content here
                 // For example, you can add text fields for email and password
                 TextFormField(
                   controller: emailController,
-                    decoration: InputDecoration(
+                  decoration: InputDecoration(
                       labelText: 'Email',
-                      hintText:'Insert Email',
+                      hintText: 'Insert Email',
                       filled: true,
                       fillColor: Colors.green.shade600,
                       labelStyle: TextStyle(color: Colors.white),
                       hintStyle: TextStyle(color: Colors.white54),
-                   focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.black38),
-                      
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.transparent)
-                    )
-                  ),
-                  style:TextStyle(color: Colors.white),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: const BorderSide(color: Colors.black38),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide:
+                              const BorderSide(color: Colors.transparent))),
+                  style: TextStyle(color: Colors.white),
                 ),
                 SizedBox(height: 8.0),
                 TextFormField(
                   controller: passwordController,
                   decoration: InputDecoration(
-                    labelText: 'Password',
-                    hintText: 'Insert Password',
-                    filled: true,
-                    fillColor: Colors.green.shade600,
-                    hintStyle: TextStyle(color: Colors.white54),
-                    labelStyle: TextStyle(color: Colors.white),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.black38),
-                      
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.transparent)
-                    )
-                  ),
-                  style:TextStyle(color: Colors.white),
+                      labelText: 'Password',
+                      hintText: 'Insert Password',
+                      filled: true,
+                      fillColor: Colors.green.shade600,
+                      hintStyle: TextStyle(color: Colors.white54),
+                      labelStyle: TextStyle(color: Colors.white),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: const BorderSide(color: Colors.black38),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide:
+                              const BorderSide(color: Colors.transparent))),
+                  style: TextStyle(color: Colors.white),
                   obscureText: true,
                 ),
                 SizedBox(height: 16.0),
@@ -122,15 +115,6 @@ class SignUpScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ElevatedButton(
-                      onPressed: _handleSignUp,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            Colors.green, // Keep the sign-up button color
-                      ),
-                      child: Text('Sign Up'),
-                    ),
-                    ElevatedButton(
-
                       onPressed: () {
                         Get.back(); // Navigate to the login page
                       },
@@ -143,7 +127,7 @@ class SignUpScreen extends StatelessWidget {
                     ElevatedButton(
                       onPressed: _handleSignUp,
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.grey.shade800,
+                        backgroundColor: Colors.grey.shade800,
                       ),
                       child: Text('Sign Up'),
                     ),

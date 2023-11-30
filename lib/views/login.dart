@@ -1,5 +1,5 @@
 // login.dart
-// ignore_for_file: prefer_const_constructors, no_leading_underscores_for_local_identifiers
+// ignore_for_file: prefer_const_constructors, no_leading_underscores_for_local_identifiers, unused_element, avoid_print
 //test
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -15,21 +15,10 @@ class LoginScreen extends StatelessWidget {
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
     final AppWriteAuthController _authController = Get.find();
-    final AuthsController _authController = Get.find();
-Future<void> _subscribeToTopic(String topic) async {
-  await FirebaseMessaging.instance.subscribeToTopic(topic);
-}
+    Future<void> _subscribeToTopic(String topic) async {
+      await FirebaseMessaging.instance.subscribeToTopic(topic);
+    }
 
-void sendCampaignNotification(String campaignTopic, String message) async {
-  try {
-    String? fcmToken = await FirebaseMessaging.instance.getToken();
-    print('FCM Token: $fcmToken');
-    await _subscribeToTopic(campaignTopic);
-    print('Simulating campaign notification: $message');
-  } catch (e) {
-    print('Error subscribing to topic or sending campaign notification: $e');
-  }
-}
     void _handleSignIn() async {
       final email = emailController.text;
       final password = passwordController.text;
@@ -61,8 +50,8 @@ void sendCampaignNotification(String campaignTopic, String message) async {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Logissn'),
-        backgroundColor:Colors.grey.shade800,
+        title: Text('Login Page'),
+        backgroundColor: Colors.grey.shade800,
       ),
       backgroundColor: const Color.fromARGB(255, 23, 23, 23),
       body: Center(
@@ -89,45 +78,40 @@ void sendCampaignNotification(String campaignTopic, String message) async {
                 TextFormField(
                   controller: emailController,
                   decoration: InputDecoration(
-                    labelText: 'Email',
-                    hintText:'Insert Email',
-                    filled: true,
-                    fillColor: Colors.blue.shade600,
-                    labelStyle: TextStyle(color: Colors.white),
-                    hintStyle: TextStyle(color: Colors.white54),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.black38),
-                      
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.transparent)
-                    )
-                    
-                  ),
+                      labelText: 'Email',
+                      hintText: 'Insert Email',
+                      filled: true,
+                      fillColor: Colors.blue.shade600,
+                      labelStyle: TextStyle(color: Colors.white),
+                      hintStyle: TextStyle(color: Colors.white54),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: const BorderSide(color: Colors.black38),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide:
+                              const BorderSide(color: Colors.transparent))),
                   style: TextStyle(color: Colors.white),
                 ),
                 SizedBox(height: 8.0),
                 TextFormField(
                   controller: passwordController,
                   decoration: InputDecoration(
-                    labelText: 'Password',
-                    hintText: 'Insert Password',
-                    filled: true,
-                    hintStyle: TextStyle(color: Colors.white54),
-                    labelStyle: TextStyle(color: Colors.white),
-                    fillColor: Colors.blue.shade600,
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.black38),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.transparent)
-                    )
-                    
-                  ),
+                      labelText: 'Password',
+                      hintText: 'Insert Password',
+                      filled: true,
+                      hintStyle: TextStyle(color: Colors.white54),
+                      labelStyle: TextStyle(color: Colors.white),
+                      fillColor: Colors.blue.shade600,
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: const BorderSide(color: Colors.black38),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide:
+                              const BorderSide(color: Colors.transparent))),
                   style: TextStyle(color: Colors.white),
                   obscureText: true,
                 ),
@@ -136,11 +120,9 @@ void sendCampaignNotification(String campaignTopic, String message) async {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ElevatedButton(
-                      onPressed:_handleSignIn,
+                      onPressed: _handleSignIn,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            Colors.orange, // Change the login button color
-                        primary: Colors.grey.shade800,
+                        backgroundColor: Colors.grey.shade800,
                       ),
                       child: Text('Login'),
                     ),

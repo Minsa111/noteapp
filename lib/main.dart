@@ -10,7 +10,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:appwrite/appwrite.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -35,8 +34,6 @@ void main() async {
   );
 
   Get.put(ImagePickerController());
-  // Get.put(AuthsController());
+  Get.put(AuthsController());
   Get.put(AppWriteAuthController());
 }
-
-
