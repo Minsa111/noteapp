@@ -44,7 +44,7 @@ class SignUpScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign Up'),
+        title: Text('Sign Up Page'),
         backgroundColor: Colors.grey.shade800,
       ),
       backgroundColor: const Color.fromARGB(255, 23, 23, 23),
