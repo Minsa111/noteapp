@@ -20,18 +20,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final AuthsController _authController = Get.find();
   final AppWriteAuthController _authControllers = Get.find();
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _authControllers.fetchNotesAfterAdd(_authControllers.userIdToken.value);
+      _authController.refreshNotes();
     });
   }
 
   Widget buildNotesList() {
-    final userId = _authControllers.userIdToken.value;
     return Obx(
       () => Expanded(
         child: RefreshIndicator(
@@ -39,23 +39,17 @@ class _HomeScreenState extends State<HomeScreen> {
             await Future.delayed(
               const Duration(seconds: 2),
             );
-            await _authControllers.fetchNotesAfterAdd(_authControllers
-                .userIdToken
-                .value); // Use await here to wait for the fetchNotes to complete
+            _authController.refreshNotes();
           },
-          child: _authControllers.notes.isEmpty
+          child: _authController.notes.isEmpty
               ? Center(
-                  // child: CircularProgressIndicator(),
-                  child: Text(
-                    'Data Is Empty',
-                    style: TextStyle(color: Colors.white70),
-                  ),
-                )
+                  child:
+                      CircularProgressIndicator()) // Menampilkan indikator loading jika data kosong.
               : ListView.builder(
                   padding: EdgeInsets.only(top: 15),
-                  itemCount: _authControllers.notes.length,
+                  itemCount: _authController.notes.length,
                   itemBuilder: (context, index) {
-                    return cardDesign(_authControllers.notes[index]);
+                    return cardDesign(_authController.notes[index]);
                   },
                 ),
         ),
@@ -72,7 +66,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 26, 26, 26),
-      body: Padding(
+      body: 
+      Padding(
         padding: const EdgeInsets.fromLTRB(16, 32, 16, 0),
         child: Column(
           children: [
@@ -176,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 }).toList(),
               ),
             ),
-
+            
             // ), Scrapped idea
             // RefreshIndicator(
             //     onRefresh: _refreshNotes,
