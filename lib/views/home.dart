@@ -174,30 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 }).toList(),
               ),
             ),
-
-            // ), Scrapped idea
-            // RefreshIndicator(
-            //     onRefresh: _refreshNotes,
-            //     child: Obx(() {
-            //       return ListView.builder(
-            //           itemCount: _authController.notes.length,
-            //           itemBuilder: (context, index) {
-            //             return cardDesign(_authController.notes[index]);
-            //           });
-            //     }))
             buildNotesList()
-            // RefreshIndicator(
-            //   onRefresh: () async {
-            //     await _refreshNotes();
-            //   },
-            //   child: ListView.builder(
-            //     padding: EdgeInsets.only(top: 15),
-            //     itemCount: _authController.notes.length,
-            //     itemBuilder: (context, index) {
-            //       return cardDesign(_authController.notes[index]);
-            //     },
-            //   ),
-            // )
           ],
         ),
       ),
