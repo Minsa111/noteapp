@@ -7,7 +7,7 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:noteapp/constants/colors.dart';
 import 'package:noteapp/controller/appwritecontroller.dart';
-import 'package:noteapp/controller/authcontroller.dart';
+// import 'package:noteapp/controller/authcontroller.dart';
 import 'package:noteapp/models/navbar.dart';
 import 'package:noteapp/controller/link.dart';
 import 'package:noteapp/models/card.dart';

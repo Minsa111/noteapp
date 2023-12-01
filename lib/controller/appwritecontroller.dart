@@ -138,6 +138,7 @@ class AppWriteAuthController extends GetxController {
           queries: [querys]);
 
       final documentData = response.documents;
+      
       if (documentData != null && documentData.isNotEmpty) {
         final note =
             documentData.map((doc) => Note.fromJson(doc.data)).toList();
@@ -152,6 +153,24 @@ class AppWriteAuthController extends GetxController {
       print('Error fetching notes: $e');
     }
   }
+
+  Future<void> deleteNote(String documentId, String noteId) async {
+  try {
+    await database.deleteDocument(
+      databaseId: '656887e4a140c5a4eb53',
+      collectionId: '656887ea72cb5e633298',
+      documentId: documentId,
+    );
+
+    // Remove the deleted note from the local list
+    notes.removeWhere((note) => note.id == noteId);
+    await fetchNotes(noteId);
+    print('Note deleted successfully');
+  } on AppwriteException catch (e) {
+    print('Error deleting note: $e');
+  }
+}
+
 
   Future<void> fetchNotesAfterAdd(String documentId) async {
     await fetchNotes(documentId);
