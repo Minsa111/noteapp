@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Note {
   final String id;
   final String title;
@@ -16,7 +18,7 @@ class Note {
       id: json['id'] as String,
       title: json['title'] as String,
       content: json['content'] as String,
-      modifiedTime: DateTime.parse(json['modifiedTime'] as String),
+      modifiedTime: (json['modifiedTime'] as Timestamp).toDate(),
     );
   }
 
@@ -25,7 +27,7 @@ class Note {
       'id': id,
       'title': title,
       'content': content,
-      'modifiedTime': modifiedTime.toIso8601String(),
+      'modifiedTime': modifiedTime,
     };
   }
 }
