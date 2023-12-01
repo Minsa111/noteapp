@@ -32,7 +32,7 @@ class _editbuttonState extends State<editbutton>
 
 FloatingActionButton editButton(BuildContext context) {
   return FloatingActionButton(
-    onPressed: () =>Get.toNamed('/edit'),
+    onPressed: () =>Get.toNamed('/add'),
     elevation: 5,
     backgroundColor: Colors.grey.shade800,
     child: const Icon(
