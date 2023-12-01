@@ -1,7 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:get/get.dart';
-import 'package:noteapp/views/edit.dart';
+import 'package:noteapp/views/addNotes.dart';
 import 'package:noteapp/views/home.dart';
 import 'package:noteapp/views/login.dart';
 import 'package:noteapp/views/webview.dart';
@@ -24,8 +24,8 @@ class AppPages {
       page: () => const LoginScreen(),
     ),
     GetPage(
-      name: _Paths.EDIT,
-      page: () => const EditScreen(),
+      name: _Paths.ADD,
+      page: () => const AddNoteScreen(),
     ),
     GetPage(
       name: _Paths.TUTORWEB,

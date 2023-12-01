@@ -57,7 +57,7 @@ class AuthsController extends GetxController {
       return notes;
     } catch (e) {
       print('Error fetching notes: $e');
-      throw e; // Optionally, you can re-throw the exception.
+      rethrow; // Optionally, you can re-throw the exception.
     }
   }
 
