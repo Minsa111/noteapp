@@ -46,13 +46,13 @@ getRandomColor() {
 
 Card cardDesign(Note note) {
   final AppWriteAuthController appWriteAuthController = Get.find();
-  final String documentId = appWriteAuthController.userIdToken.value;
-  final noteId = note.id;
-  print('Documentid: ${documentId}');
+  final String noteId = note.id;
+  final String docsId = note.docsId;
   print('noteId: ${note.id}');
   print('Title: ${note.title}');
   print('Content: ${note.content}');
   print('Modified Time: ${note.modifiedTime}');
+  print('docsId: ${note.docsId}');
   return Card(
     margin: EdgeInsets.only(bottom: 20),
     color: getRandomColor(),
@@ -93,7 +93,7 @@ Card cardDesign(Note note) {
         ),
         trailing: IconButton(
           onPressed: () async{
-            await appWriteAuthController.deleteNote('65695c7d65ae57cf3acf', noteId);//cara ngotomatisnya gimana cuy
+            await appWriteAuthController.deleteNote(docsId, noteId);//cara ngotomatisnya gimana cuy
           },
           icon: const Icon(Icons.delete_rounded),
         ),

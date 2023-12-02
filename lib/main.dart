@@ -34,6 +34,6 @@ void main() async {
   );
 
   Get.put(ImagePickerController());
-  Get.put(AuthsController());
+  // Get.put(AuthsController());
   Get.put(AppWriteAuthController());
 }
