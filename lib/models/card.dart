@@ -3,9 +3,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:noteapp/models/note.dart';
 import 'package:noteapp/constants/colors.dart';
+import 'package:noteapp/controller/appwritecontroller.dart';
+
 
 class MyWidget extends StatefulWidget {
   const MyWidget({super.key});
@@ -42,6 +45,11 @@ getRandomColor() {
 }
 
 Card cardDesign(Note note) {
+  final AppWriteAuthController appWriteAuthController = Get.find();
+  final String documentId = appWriteAuthController.userIdToken.value;
+  final noteId = note.id;
+  print('Documentid: ${documentId}');
+  print('noteId: ${note.id}');
   print('Title: ${note.title}');
   print('Content: ${note.content}');
   print('Modified Time: ${note.modifiedTime}');
@@ -84,10 +92,10 @@ Card cardDesign(Note note) {
           ),
         ),
         trailing: IconButton(
-          onPressed: () {
-            // Tambahkan logika untuk tindakan saat tombol ditekan
+          onPressed: () async{
+            await appWriteAuthController.deleteNote('65695c7d65ae57cf3acf', noteId);//cara ngotomatisnya gimana cuy
           },
-          icon: const Icon(Icons.heart_broken),
+          icon: const Icon(Icons.delete_rounded),
         ),
       ),
     ),
