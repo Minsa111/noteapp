@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:noteapp/models/note.dart';
 import 'package:noteapp/constants/colors.dart';
 import 'package:noteapp/controller/appwritecontroller.dart';
-
+import 'package:noteapp/views/EditNote.dart';
 
 class MyWidget extends StatefulWidget {
   const MyWidget({super.key});
@@ -91,11 +91,22 @@ Card cardDesign(Note note) {
                 color: Colors.grey.shade800),
           ),
         ),
-        trailing: IconButton(
-          onPressed: () async{
-            await appWriteAuthController.deleteNote(docsId, noteId);//cara ngotomatisnya gimana cuy
-          },
-          icon: const Icon(Icons.delete_rounded),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              onPressed: () async {
+                await Get.to(EditNoteScreen(), arguments: note);
+              },
+              icon: const Icon(Icons.edit),
+            ),
+            IconButton(
+              onPressed: () async {
+                await appWriteAuthController.deleteNote(docsId, noteId);
+              },
+              icon: const Icon(Icons.delete_rounded),
+            ),
+          ],
         ),
       ),
     ),

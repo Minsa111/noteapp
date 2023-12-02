@@ -176,7 +176,32 @@ class AppWriteAuthController extends GetxController {
     print('Error deleting note: $e');
   }
 }
-// I/flutter (25462): Error deleting note: AppwriteException: , <!DOCTYPE html><html lang="en"><head> <meta charset="utf-8" /> <meta name="description" content="" /> <link rel="icon" href="/favicon.png" /> <link rel="preload" href="/fonts/inter/inter-v8-latin-600.woff2" as="font" type="font/woff2" crossorigin /> <link rel="preload" href="/fonts/inter/inter-v8-latin-regular.woff2" as="font" type="font/woff2" crossorigin /> <link rel="preload" href="/fonts/poppins/poppins-v19-latin-500.woff2" as="font" type="font/woff2" crossorigin /> <link rel="preload" href="/fonts/poppins/poppins-v19-latin-600.woff2" as="font" type="font/woff2" crossorigin /> <link rel="preload" href="/fonts/poppins/poppins-v19-latin-700.woff2" as="font" type="font/woff2" crossorigin /> <link rel="preload" href="/fonts/source-code-pro/source-code-pro-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin /> <link rel="stylesheet" href="https://unpkg.com/@appwrite.io/pink" /> <link rel="preload" as="style" type="text/css" href="/fonts/main.css" /> <link
+
+Future<bool> updateNote(String documentId, String noteId) async {
+  try {
+    final title = titleController.text;
+    final content = contentController.text;
+
+    if (title.isNotEmpty && content.isNotEmpty) {
+      await database.updateDocument(
+        databaseId: '656887e4a140c5a4eb53',
+        collectionId: '656887ea72cb5e633298',
+        documentId: documentId,
+        data: {
+          'title': title,
+          'content': content,
+        },
+      );
+      return true; // Update successful
+    } else {
+      return false; // Title or content is empty
+    }
+  } on AppwriteException catch (e) {
+    print('Error updating note: $e');
+    return false; // Update failed
+  }
+}
+
 
   Future<void> fetchNotesAfterAdd(String documentId) async {
     await fetchNotes(documentId);
