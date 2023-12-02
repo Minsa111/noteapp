@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:noteapp/models/note.dart';
+import 'package:uuid/uuid.dart';
 
 final client = Client()
     .setEndpoint('https://cloud.appwrite.io/v1')
@@ -93,27 +94,32 @@ class AppWriteAuthController extends GetxController {
 
       if (title.isNotEmpty && content.isNotEmpty) {
         await fetchNotes(documentIds);
-        final uniqueUserId = ID.unique();
+        final String uniqueUserId = Uuid().v4();
+        final String noteid = uniqueUserId.replaceAll('-', '');
         final formatter = DateFormat('dd MMMM yyyy HH:mm:ss');
         final dateString = DateTime.now();
         final formattedTime = formatter.format(dateString);
         final parsedTime = formatter.parse(formattedTime);
+        print(uniqueUserId);
+        
         final newNote = Note(
           id: documentIds,
           title: title,
           content: content,
           modifiedTime: parsedTime,
+          docsId: noteid
         );
         notes.add(newNote);
         await database.createDocument(
           databaseId: '656887e4a140c5a4eb53',
           collectionId: '656887ea72cb5e633298',
-          documentId: uniqueUserId,
+          documentId: noteid,
           data: {
             'id': documentIds,
             'title': title,
             'content': content,
             'modifiedTime': formattedTime,
+            'docsId': noteid
           },
         );
         await fetchNotesAfterAdd(documentIds);
@@ -163,14 +169,14 @@ class AppWriteAuthController extends GetxController {
     );
 
     // Remove the deleted note from the local list
-    notes.removeWhere((note) => note.id == noteId);
+    notes.removeWhere((note) => note.docsId== noteId);
     await fetchNotes(noteId);
     print('Note deleted successfully');
   } on AppwriteException catch (e) {
     print('Error deleting note: $e');
   }
 }
-
+// I/flutter (25462): Error deleting note: AppwriteException: , <!DOCTYPE html><html lang="en"><head> <meta charset="utf-8" /> <meta name="description" content="" /> <link rel="icon" href="/favicon.png" /> <link rel="preload" href="/fonts/inter/inter-v8-latin-600.woff2" as="font" type="font/woff2" crossorigin /> <link rel="preload" href="/fonts/inter/inter-v8-latin-regular.woff2" as="font" type="font/woff2" crossorigin /> <link rel="preload" href="/fonts/poppins/poppins-v19-latin-500.woff2" as="font" type="font/woff2" crossorigin /> <link rel="preload" href="/fonts/poppins/poppins-v19-latin-600.woff2" as="font" type="font/woff2" crossorigin /> <link rel="preload" href="/fonts/poppins/poppins-v19-latin-700.woff2" as="font" type="font/woff2" crossorigin /> <link rel="preload" href="/fonts/source-code-pro/source-code-pro-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin /> <link rel="stylesheet" href="https://unpkg.com/@appwrite.io/pink" /> <link rel="preload" as="style" type="text/css" href="/fonts/main.css" /> <link
 
   Future<void> fetchNotesAfterAdd(String documentId) async {
     await fetchNotes(documentId);

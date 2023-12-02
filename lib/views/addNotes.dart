@@ -90,7 +90,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
             ),
             Column(children: <Widget>[
               TextField(
-                controller: appWriteAuthController.contentController,
+                controller: appWriteAuthController.titleController,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 30,
@@ -101,7 +101,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                     hintStyle: TextStyle(color: Colors.grey, fontSize: 30)),
               ),
               TextField(
-                controller: appWriteAuthController.titleController,
+                controller: appWriteAuthController.contentController,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
