@@ -195,7 +195,8 @@ class AppWriteAuthController extends GetxController {
             'modifiedTime': formattedTime
           },
         );
-        clearControllers();
+        fetchNotes(noteId);
+        // clearControllers();
         return true; // Update successful
       } else {
         return false; // Title or content is empty

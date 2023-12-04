@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:noteapp/models/note.dart';
 import 'package:noteapp/constants/colors.dart';
 import 'package:noteapp/controller/appwritecontroller.dart';
-import 'package:noteapp/views/EditNote.dart';
+import 'package:noteapp/views/edit_note.dart';
 
 class MyWidget extends StatefulWidget {
   const MyWidget({super.key});
