@@ -15,7 +15,6 @@ class EditNoteScreen extends StatefulWidget {
   State<EditNoteScreen> createState() => _EditNoteScreenState();
 }
 
-
 class _EditNoteScreenState extends State<EditNoteScreen> {
   final AppWriteAuthController appWriteAuthController = Get.find();
 
@@ -24,24 +23,21 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
     super.initState();
 
     // Retrieve the note data passed from the previous screen
-  final Note note = Get.arguments as Note;
+    final Note note = Get.arguments as Note;
 
     // Set the title and content in the controllers for editing
-  appWriteAuthController.titleController.text = note.title;
-appWriteAuthController.contentController.text = note.content;
+    appWriteAuthController.titleController.text = note.title;
+    appWriteAuthController.contentController.text = note.content;
   }
 
   void _handleUpdate() async {
-   // Get the note ID and document ID from the selected note
+    // Get the note ID and document ID from the selected note
     final Note note = Get.arguments as Note;
     final String docsId = note.docsId;
     final String noteId = note.id;
 
-
-
     // Call the updateNote method from the controller
-     final success = await appWriteAuthController.updateNote(docsId, noteId);
-
+    final success = await appWriteAuthController.updateNote(docsId, noteId);
 
     if (success) {
       // Show a success message
@@ -67,7 +63,7 @@ appWriteAuthController.contentController.text = note.content;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 26, 26, 26),
+      backgroundColor: const Color.fromARGB(255, 26, 26, 26),
       body: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(16, 32, 16, 0),
         child: Column(
@@ -81,14 +77,14 @@ appWriteAuthController.contentController.text = note.content;
                     // Add logic to handle image picking if needed
                     // Get.find<ImagePickerController>().pickImageFromGallery();
                   },
-                  child: Icon(
-                    Icons.add_a_photo,
-                    color: Colors.white,
-                  ),
                   style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Colors.grey.shade800),
                     elevation: MaterialStateProperty.all<double>(8.0),
+                  ),
+                  child: const Icon(
+                    Icons.add_a_photo,
+                    color: Colors.white,
                   ),
                 ),
                 IconButton(
@@ -96,7 +92,7 @@ appWriteAuthController.contentController.text = note.content;
                     // Call the update method when check icon is pressed
                     _handleUpdate();
                   },
-                  padding: EdgeInsets.all(0),
+                  padding: const EdgeInsets.all(0),
                   icon: Container(
                     width: 40,
                     height: 40,
@@ -104,7 +100,7 @@ appWriteAuthController.contentController.text = note.content;
                       color: Colors.grey.withOpacity(.2),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.check,
                       color: Colors.white,
                     ),
@@ -115,22 +111,22 @@ appWriteAuthController.contentController.text = note.content;
             Column(children: <Widget>[
               TextField(
                 controller: appWriteAuthController.titleController,
-                style: TextStyle(
+                style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 30,
                     color: Colors.white),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Title',
                     hintStyle: TextStyle(color: Colors.grey, fontSize: 30)),
               ),
               TextField(
                 controller: appWriteAuthController.contentController,
-                style: TextStyle(
+                style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
                     color: Colors.white),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Type Something Here...',
                     hintStyle: TextStyle(color: Colors.grey, fontSize: 16)),
@@ -160,12 +156,12 @@ appWriteAuthController.contentController.text = note.content;
                                             Get.find<ImagePickerController>()
                                                 .removeImage(imagePath);
                                           },
-                                          child: Icon(
+                                          elevation: 0.0,
+                                          backgroundColor: Colors.transparent,
+                                          child: const Icon(
                                             Icons.close,
                                             color: Colors.black,
                                           ),
-                                          elevation: 0.0,
-                                          backgroundColor: Colors.transparent,
                                         ),
                                       ))))
                         ],

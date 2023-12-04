@@ -7,7 +7,6 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:noteapp/constants/colors.dart';
 import 'package:noteapp/controller/appwritecontroller.dart';
-// import 'package:noteapp/controller/authcontroller.dart';
 import 'package:noteapp/models/navbar.dart';
 import 'package:noteapp/controller/link.dart';
 import 'package:noteapp/models/card.dart';
@@ -31,7 +30,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget buildNotesList() {
-    final userId = _authControllers.userIdToken.value;
     return Obx(
       () => Expanded(
         child: RefreshIndicator(
@@ -47,8 +45,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ? Center(
                   // child: CircularProgressIndicator(),
                   child: Text(
-                    'Data Is Empty',
-                    style: TextStyle(color: Colors.white70),
+                    'Notes Is Empty',
+                    style: TextStyle(color: Colors.white, fontSize: 25),
                   ),
                 )
               : ListView.builder(
@@ -176,30 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 }).toList(),
               ),
             ),
-
-            // ), Scrapped idea
-            // RefreshIndicator(
-            //     onRefresh: _refreshNotes,
-            //     child: Obx(() {
-            //       return ListView.builder(
-            //           itemCount: _authController.notes.length,
-            //           itemBuilder: (context, index) {
-            //             return cardDesign(_authController.notes[index]);
-            //           });
-            //     }))
             buildNotesList()
-            // RefreshIndicator(
-            //   onRefresh: () async {
-            //     await _refreshNotes();
-            //   },
-            //   child: ListView.builder(
-            //     padding: EdgeInsets.only(top: 15),
-            //     itemCount: _authController.notes.length,
-            //     itemBuilder: (context, index) {
-            //       return cardDesign(_authController.notes[index]);
-            //     },
-            //   ),
-            // )
           ],
         ),
       ),

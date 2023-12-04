@@ -1,6 +1,6 @@
-
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+
 class editbutton extends StatefulWidget {
   const editbutton({super.key});
 
@@ -32,7 +32,7 @@ class _editbuttonState extends State<editbutton>
 
 FloatingActionButton editButton(BuildContext context) {
   return FloatingActionButton(
-    onPressed: () =>Get.toNamed('/add'),
+    onPressed: () => Get.toNamed('/add'),
     elevation: 5,
     backgroundColor: Colors.grey.shade800,
     child: const Icon(
@@ -42,7 +42,6 @@ FloatingActionButton editButton(BuildContext context) {
   );
 }
 
-  
 FloatingActionButton checkButton() {
   return FloatingActionButton(
     onPressed: () {},
@@ -55,31 +54,26 @@ FloatingActionButton checkButton() {
         color: Colors.grey.shade800,
         borderRadius: BorderRadius.circular(8.0),
       ),
-      child: Icon(Icons.check),
+      child: const Icon(Icons.check),
     ),
   );
 }
-
 
 FloatingActionButton backHome(BuildContext context) {
   return FloatingActionButton(
-    onPressed: ()=>Get.back(),
-    elevation: 8, // Add elevation here
-    backgroundColor: Colors.transparent,
-    child: Container(
-    width: 40,
-    height: 40,
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(8.0),
-      color: Colors.grey.shade800,
-    ),
-    child: Icon(
-      Icons.arrow_back_ios_new,
-      color: Colors.white,
-    ),
-    )
-  );
+      onPressed: () => Get.back(),
+      elevation: 8, // Add elevation here
+      backgroundColor: Colors.transparent,
+      child: Container(
+        width: 40,
+        height: 40,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8.0),
+          color: Colors.grey.shade800,
+        ),
+        child: const Icon(
+          Icons.arrow_back_ios_new,
+          color: Colors.white,
+        ),
+      ));
 }
-
-
-

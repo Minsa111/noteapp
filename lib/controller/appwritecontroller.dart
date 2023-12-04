@@ -16,6 +16,7 @@ final database = Databases(client);
 
 class AppWriteAuthController extends GetxController {
   RxString userIdToken = ''.obs;
+  RxString docsIds = ''.obs;
   RxList<Note> notes = <Note>[].obs;
 
   @override
@@ -94,21 +95,20 @@ class AppWriteAuthController extends GetxController {
 
       if (title.isNotEmpty && content.isNotEmpty) {
         await fetchNotes(documentIds);
-        final String uniqueUserId = Uuid().v4();
+        final String uniqueUserId = const Uuid().v4();
         final String noteid = uniqueUserId.replaceAll('-', '');
         final formatter = DateFormat('dd MMMM yyyy HH:mm:ss');
         final dateString = DateTime.now();
         final formattedTime = formatter.format(dateString);
         final parsedTime = formatter.parse(formattedTime);
         print(uniqueUserId);
-        
+
         final newNote = Note(
-          id: documentIds,
-          title: title,
-          content: content,
-          modifiedTime: parsedTime,
-          docsId: noteid
-        );
+            id: documentIds,
+            title: title,
+            content: content,
+            modifiedTime: parsedTime,
+            docsId: noteid);
         notes.add(newNote);
         await database.createDocument(
           databaseId: '656887e4a140c5a4eb53',
@@ -144,7 +144,7 @@ class AppWriteAuthController extends GetxController {
           queries: [querys]);
 
       final documentData = response.documents;
-      
+
       if (documentData != null && documentData.isNotEmpty) {
         final note =
             documentData.map((doc) => Note.fromJson(doc.data)).toList();
@@ -160,48 +160,62 @@ class AppWriteAuthController extends GetxController {
     }
   }
 
-  Future<void> deleteNote(String documentId, String noteId) async {
-  try {
-    await database.deleteDocument(
-      databaseId: '656887e4a140c5a4eb53',
-      collectionId: '656887ea72cb5e633298',
-      documentId: documentId,
-    );
+  // Future<void> deleteNote(String docsId, String noteId) async {
+  //   try {
+  //     final res = await database.deleteDocument(
+  //         databaseId: '656887e4a140c5a4eb53',
+  //         collectionId: '656887ea72cb5e633298',
+  //         documentId: docsId);
+  //     notes.removeWhere((note) => note.docsId == noteId);
+  //     await fetchNotesAfterAdd(noteId);
+  //     print('Note deleted successfully');
+  //     return res;
+  //   } on AppwriteException catch (e) {
+  //     print('Error deleting note: $e');
+  //   }
+  // }
 
-    // Remove the deleted note from the local list
-    notes.removeWhere((note) => note.docsId== noteId);
-    await fetchNotes(noteId);
-    print('Note deleted successfully');
-  } on AppwriteException catch (e) {
-    print('Error deleting note: $e');
-  }
-}
-
-Future<bool> updateNote(String documentId, String noteId) async {
-  try {
-    final title = titleController.text;
-    final content = contentController.text;
-
-    if (title.isNotEmpty && content.isNotEmpty) {
-      await database.updateDocument(
-        databaseId: '656887e4a140c5a4eb53',
-        collectionId: '656887ea72cb5e633298',
-        documentId: documentId,
-        data: {
-          'title': title,
-          'content': content,
-        },
-      );
-      return true; // Update successful
-    } else {
-      return false; // Title or content is empty
+  Future<bool> deleteNote(String docsId, String noteId) async {
+    try {
+      await database.deleteDocument(
+          databaseId: '656887e4a140c5a4eb53',
+          collectionId: '656887ea72cb5e633298',
+          documentId: docsId);
+      notes.removeWhere((note) => note.docsId == noteId);
+      await fetchNotesAfterAdd(noteId);
+      print('Note deleted successfully');
+      return true;
+    } on AppwriteException catch (e) {
+      print('Error deleting note: $e');
+      return false;
     }
-  } on AppwriteException catch (e) {
-    print('Error updating note: $e');
-    return false; // Update failed
   }
-}
 
+  Future<bool> updateNote(String documentId, String noteId) async {
+    try {
+      final title = titleController.text;
+      final content = contentController.text;
+
+      if (title.isNotEmpty && content.isNotEmpty) {
+        await database.updateDocument(
+          databaseId: '656887e4a140c5a4eb53',
+          collectionId: '656887ea72cb5e633298',
+          documentId: documentId,
+          data: {
+            'title': title,
+            'content': content,
+          },
+        );
+        clearControllers();
+        return true; // Update successful
+      } else {
+        return false; // Title or content is empty
+      }
+    } on AppwriteException catch (e) {
+      print('Error updating note: $e');
+      return false; // Update failed
+    }
+  }
 
   Future<void> fetchNotesAfterAdd(String documentId) async {
     await fetchNotes(documentId);
