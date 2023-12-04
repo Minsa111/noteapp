@@ -45,8 +45,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ? Center(
                   // child: CircularProgressIndicator(),
                   child: Text(
-                    'Data Is Empty',
-                    style: TextStyle(color: Colors.white70),
+                    'Notes Is Empty',
+                    style: TextStyle(color: Colors.white, fontSize: 25),
                   ),
                 )
               : ListView.builder(

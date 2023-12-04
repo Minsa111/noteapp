@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last, no_leading_underscores_for_local_identifiers
+// edit_note_screen.dart
 
 import 'dart:io';
 
@@ -7,31 +7,49 @@ import 'package:noteapp/controller/appwritecontroller.dart';
 import 'package:noteapp/controller/link.dart';
 import 'package:get/get.dart';
 import 'package:noteapp/controller/image.dart';
+import 'package:noteapp/models/note.dart';
 
-class AddNoteScreen extends StatefulWidget {
-  const AddNoteScreen({super.key});
+class EditNoteScreen extends StatefulWidget {
+  const EditNoteScreen({super.key});
   @override
-  State<AddNoteScreen> createState() => _AddNoteScreenState();
+  State<EditNoteScreen> createState() => _EditNoteScreenState();
 }
 
-class _AddNoteScreenState extends State<AddNoteScreen> {
-  get pickImageFromGallery => null;
+class _EditNoteScreenState extends State<EditNoteScreen> {
   final AppWriteAuthController appWriteAuthController = Get.find();
 
-  void _handleSubmit() async {
-    final success = await appWriteAuthController
-        .addNote(appWriteAuthController.userIdToken.value);
+  @override
+  void initState() {
+    super.initState();
+
+    // Retrieve the note data passed from the previous screen
+    final Note note = Get.arguments as Note;
+
+    // Set the title and content in the controllers for editing
+    appWriteAuthController.titleController.text = note.title;
+    appWriteAuthController.contentController.text = note.content;
+  }
+
+  void _handleUpdate() async {
+    // Get the note ID and document ID from the selected note
+    final Note note = Get.arguments as Note;
+    final String docsId = note.docsId;
+    final String noteId = note.id;
+
+    // Call the updateNote method from the controller
+    final success = await appWriteAuthController.updateNote(docsId, noteId);
+
     if (success) {
-      // Show a success message, you can use SnackBar or any other UI feedback
+      // Show a success message
       Get.snackbar(
         "Success",
-        "Note added successfully",
+        "Note updated successfully",
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.green.withOpacity(0.1),
         colorText: Colors.green,
       );
     } else {
-      // Show an error message if title or content is empty
+      // Show an error message
       Get.snackbar(
         "Error",
         "Title and content cannot be empty",
@@ -45,7 +63,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 26, 26, 26),
+      backgroundColor: const Color.fromARGB(255, 26, 26, 26),
       body: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(16, 32, 16, 0),
         child: Column(
@@ -56,23 +74,25 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                 backHome(context),
                 ElevatedButton(
                   onPressed: () {
-                    Get.find<ImagePickerController>().pickImageFromGallery();
+                    // Add logic to handle image picking if needed
+                    // Get.find<ImagePickerController>().pickImageFromGallery();
                   },
-                  child: Icon(
-                    Icons.add_a_photo,
-                    color: Colors.white,
-                  ),
                   style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Colors.grey.shade800),
                     elevation: MaterialStateProperty.all<double>(8.0),
                   ),
+                  child: const Icon(
+                    Icons.add_a_photo,
+                    color: Colors.white,
+                  ),
                 ),
                 IconButton(
                   onPressed: () {
-                    _handleSubmit();
+                    // Call the update method when check icon is pressed
+                    _handleUpdate();
                   },
-                  padding: EdgeInsets.all(0),
+                  padding: const EdgeInsets.all(0),
                   icon: Container(
                     width: 40,
                     height: 40,
@@ -80,7 +100,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                       color: Colors.grey.withOpacity(.2),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.check,
                       color: Colors.white,
                     ),
@@ -91,22 +111,22 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
             Column(children: <Widget>[
               TextField(
                 controller: appWriteAuthController.titleController,
-                style: TextStyle(
+                style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 30,
                     color: Colors.white),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Title',
                     hintStyle: TextStyle(color: Colors.grey, fontSize: 30)),
               ),
               TextField(
                 controller: appWriteAuthController.contentController,
-                style: TextStyle(
+                style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
                     color: Colors.white),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Type Something Here...',
                     hintStyle: TextStyle(color: Colors.grey, fontSize: 16)),
@@ -136,12 +156,12 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                                             Get.find<ImagePickerController>()
                                                 .removeImage(imagePath);
                                           },
-                                          child: Icon(
+                                          elevation: 0.0,
+                                          backgroundColor: Colors.transparent,
+                                          child: const Icon(
                                             Icons.close,
                                             color: Colors.black,
                                           ),
-                                          elevation: 0.0,
-                                          backgroundColor: Colors.transparent,
                                         ),
                                       ))))
                         ],
