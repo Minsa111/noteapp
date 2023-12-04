@@ -160,21 +160,6 @@ class AppWriteAuthController extends GetxController {
     }
   }
 
-  // Future<void> deleteNote(String docsId, String noteId) async {
-  //   try {
-  //     final res = await database.deleteDocument(
-  //         databaseId: '656887e4a140c5a4eb53',
-  //         collectionId: '656887ea72cb5e633298',
-  //         documentId: docsId);
-  //     notes.removeWhere((note) => note.docsId == noteId);
-  //     await fetchNotesAfterAdd(noteId);
-  //     print('Note deleted successfully');
-  //     return res;
-  //   } on AppwriteException catch (e) {
-  //     print('Error deleting note: $e');
-  //   }
-  // }
-
   Future<bool> deleteNote(String docsId, String noteId) async {
     try {
       await database.deleteDocument(
