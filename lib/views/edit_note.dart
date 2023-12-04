@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:noteapp/controller/appwritecontroller.dart';
-import 'package:noteapp/controller/link.dart';
 import 'package:get/get.dart';
 import 'package:noteapp/controller/image.dart';
 import 'package:noteapp/models/note.dart';
@@ -71,7 +70,26 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                backHome(context),
+                FloatingActionButton(
+                    onPressed: () {
+                      Get.back();
+                      appWriteAuthController.clearControllers();
+                    },
+                    elevation: 8, // Add elevation here
+                    backgroundColor: Colors.transparent,
+                    child: Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.0),
+                        color: Colors.grey.shade800,
+                      ),
+                      child: const Icon(
+                        Icons.arrow_back_ios_new,
+                        color: Colors.white,
+                      ),
+                    )),
+
                 ElevatedButton(
                   onPressed: () {
                     // Add logic to handle image picking if needed

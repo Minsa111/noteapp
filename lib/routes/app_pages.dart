@@ -1,7 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:get/get.dart';
-import 'package:noteapp/views/addNotes.dart';
+import 'package:noteapp/views/add_notes.dart';
 import 'package:noteapp/views/home.dart';
 import 'package:noteapp/views/login.dart';
 import 'package:noteapp/views/webview.dart';

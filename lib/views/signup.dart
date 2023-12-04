@@ -4,7 +4,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:noteapp/controller/appwritecontroller.dart';
-import 'package:noteapp/controller/notifcontroller.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({Key? key}) : super(key: key);
