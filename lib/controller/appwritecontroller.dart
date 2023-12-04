@@ -180,6 +180,9 @@ class AppWriteAuthController extends GetxController {
     try {
       final title = titleController.text;
       final content = contentController.text;
+      final formatter = DateFormat('dd MMMM yyyy HH:mm:ss');
+      final dateString = DateTime.now();
+      final formattedTime = formatter.format(dateString);
 
       if (title.isNotEmpty && content.isNotEmpty) {
         await database.updateDocument(
@@ -189,6 +192,7 @@ class AppWriteAuthController extends GetxController {
           data: {
             'title': title,
             'content': content,
+            'modifiedTime': formattedTime
           },
         );
         clearControllers();
