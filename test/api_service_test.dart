@@ -1,59 +1,36 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:http/http.dart' as http;
-import 'package:mockito/annotations.dart';
+import 'package:get/get.dart';
+import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:noteapp/api/api_service.dart';
-import 'package:noteapp/api/articles_model.dart';
+import 'package:noteapp/controller/appwritecontroller.dart'; // Replace with the actual import path
+import 'package:appwrite/appwrite.dart'
 
-import 'api_service_test.mocks.dart';
 
-// Generate a MockClient using the Mockito package.
-// Create new instances of this class in each test.
-@GenerateMocks([http.Client, ApiService])
+@GenerateMocks([Account])
 void main() {
-// Constants for API details
-  const _apiKey = 'YOUR_API_KEY';
-  const _baseUrl = 'https://newsapi.org/v2/';
-  const String _category = 'business';
-  const String _country = 'us';
-// Initialize ApiService and MockClient
-  late ApiService apiService;
-  late MockClient mockClient;
-  setUp(() {
-// Set up MockClient and ApiService for each test
-    mockClient = MockClient();
-    apiService = ApiService();
+  /// Setup dependencies for the repo
+  late MockAccount _mockAccount;
+  late AuthRepositoryImpl _repository;
+  
+  setUp((){
+    _mockAccount = MockAccount();
+    _repository = AuthRepositoryImpl(_mockAccount);
   });
-  group('ApiService', () {
-    test('fetchArticles returns a list of articles if response is successful',
-        () async {
-// Mock the HTTP response for successful case
-      when(mockClient.get(Uri.parse(
-              '${_baseUrl}top-headlines?country=$_country&category=$_category&apiKey=$_apiKey')))
-          .thenAnswer((_) async =>
-              http.Response('{"articles": []}', 200)); // Mock the HTTP response
-      final articles = await apiService.fetchArticles();
-// Expect the fetched data to be a list of Article objects
-      expect(articles, isA<List<Article>>());
-    });
-    test('fetchArticles returns an empty list if response fails', () async {
-// Mock the HTTP response for response failure
-      when(mockClient.get(Uri.parse(
-              '${_baseUrl}top-headlines?country=$_country&category=$_category&apiKey=$_apiKey')))
-          .thenAnswer((_) async =>
-              http.Response('Server error', 500)); // Mock the HTTP response
-      final articles = await apiService.fetchArticles();
-// Expect the fetched data to be an empty list
-      expect(articles, isA<List<Article>>());
-    });
-    test('fetchArticles returns an empty list if an error occurs', () async {
-// Mock an error response
-      when(mockClient.get(Uri.parse(
-              '${_baseUrl}top-headlines?country=$_country&category=$_category&apiKey=$_apiKey')))
-          .thenThrow(Exception('Test error'));
-      final articles = await apiService.fetchArticles();
-// Expect the fetched data to be an empty list
-      expect(articles, isA<List<Article>>());
-    });
+  
+  /// Login
+  test('should return session object when login successful', () async {
+    /// ARRANGE
+    when(_mockAccount.createSession(
+      email: 'aditya@mail.com',
+      password: '_testAccount1',
+    )).thenAnswer((_) async => testSessionObj);
+    
+    /// ACT
+    final _result = await _repository.login(
+      email: 'aditya@mail.com', password: '_testAccount1');
+
+    /// ASSERT
+    verify(_mockAccount.createSession(
+      email: 'aditya@mail.com', password: '_testAccount1'));
+    expect(_result, equals(Right(testSessionObj)));
   });
 }
