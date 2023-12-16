@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:noteapp/controller/appwritecontroller.dart';
-import 'package:noteapp/controller/link.dart';
 import 'package:get/get.dart';
 import 'package:noteapp/controller/image.dart';
 
@@ -53,7 +52,22 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                backHome(context),
+                FloatingActionButton(
+                  onPressed: () => Get.back(),
+                  elevation: 8, // Add elevation here
+                  backgroundColor: Colors.transparent,
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8.0),
+                      color: Colors.grey.shade800,
+                    ),
+                    child: const Icon(
+                      Icons.arrow_back_ios_new,
+                      color: Colors.white,
+                    ),
+                  )),
                 ElevatedButton(
                   onPressed: () {
                     Get.find<ImagePickerController>().pickImageFromGallery();

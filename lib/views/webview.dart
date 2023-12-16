@@ -19,7 +19,7 @@ class _TutorWebScreenState extends State<TutorWebScreen> {
         title: Text("nice"),
         ),
         body: WebView(
-          initialUrl:"https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          initialUrl:"https://github.com/Bima595/NoteApp",
           javascriptMode: JavascriptMode.unrestricted,
         ),
       ),

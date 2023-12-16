@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 import 'package:noteapp/constants/colors.dart';
 import 'package:noteapp/controller/appwritecontroller.dart';
 import 'package:noteapp/models/navbar.dart';
-import 'package:noteapp/controller/link.dart';
 import 'package:noteapp/models/card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -178,7 +177,15 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      floatingActionButton: editButton(context),
+      floatingActionButton:FloatingActionButton(
+        onPressed: () => Get.toNamed('/add'),
+        elevation: 5,
+        backgroundColor: Colors.grey.shade800,
+        child: const Icon(
+          Icons.add,
+          size: 38,
+        ),
+      ),
     );
   }
 }
