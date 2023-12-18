@@ -13,15 +13,14 @@ class _TutorWebScreenState extends State<TutorWebScreen> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Welcome',
-      home: Scaffold
-      (
+      home: Scaffold(
         appBar: AppBar(
-        title: Text("nice"),
+          title: const Text("nice"),
         ),
-        body: WebView(
-          initialUrl:"https://github.com/Bima595/NoteApp",
-          javascriptMode: JavascriptMode.unrestricted,
-        ),
+        // body: WebView(
+        //   initialUrl: "https://github.com/Bima595/NoteApp",
+        //   javascriptMode: JavascriptMode.unrestricted,
+        // ),
       ),
     );
   }
