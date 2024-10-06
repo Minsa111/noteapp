@@ -97,8 +97,8 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
                   },
                   style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.grey.shade800),
-                    elevation: MaterialStateProperty.all<double>(8.0),
+                        WidgetStateProperty.all<Color>(Colors.grey.shade800),
+                    elevation: WidgetStateProperty.all<double>(8.0),
                   ),
                   child: const Icon(
                     Icons.add_a_photo,

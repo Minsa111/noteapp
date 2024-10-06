@@ -27,7 +27,7 @@ void main() {
     expect(find.byType(ListTile), findsOneWidget);
     expect(find.text('Task 1'), findsOneWidget);
 // Dismiss the item
-    await tester.drag(find.byType(Dismissible), Offset(500.0, 0.0));
+    await tester.drag(find.byType(Dismissible), const Offset(500.0, 0.0));
     await tester.pumpAndSettle();
 // Verify if the item is removed
     expect(find.byType(ListTile), findsNothing);

@@ -55,7 +55,7 @@ Card cardDesign(Note note) {
   print('Modified Time: ${note.modifiedTime}');
   print('docsId: ${note.docsId}');
 
-  void _handleDelete() async {
+  void handleDelete() async {
     final delete = await appWriteAuthController.deleteNote(docsId, noteId);
     if (delete) {
       Get.snackbar(
@@ -125,7 +125,7 @@ Card cardDesign(Note note) {
             ),
             IconButton(
               onPressed: () {
-                _handleDelete();
+                handleDelete();
               },
               icon: const Icon(Icons.delete_rounded),
             ),
