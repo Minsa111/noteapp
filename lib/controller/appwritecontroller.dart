@@ -9,7 +9,7 @@ import 'package:uuid/uuid.dart';
 
 final client = Client()
     .setEndpoint('https://cloud.appwrite.io/v1')
-    .setProject('65631c1398656071fe82');
+    .setProject('67010bca000018600a19');
 
 final account = Account(client);
 final database = Databases(client);
@@ -55,7 +55,7 @@ class AppWriteAuthController extends GetxController {
 
   Future<bool> signIn(String email, String password) async {
     try {
-      final response = await account.createEmailSession(
+      final response = await account.createEmailPasswordSession(
         email: email,
         password: password,
       );
@@ -111,8 +111,8 @@ class AppWriteAuthController extends GetxController {
             docsId: noteid);
         notes.add(newNote);
         await database.createDocument(
-          databaseId: '656887e4a140c5a4eb53',
-          collectionId: '656887ea72cb5e633298',
+          databaseId: '67010e94000721dbfcfe',
+          collectionId: '67010ecb00190ecf3a6a',
           documentId: noteid,
           data: {
             'id': documentIds,
@@ -139,8 +139,8 @@ class AppWriteAuthController extends GetxController {
       final querys = Query.equal('id', userIdToken);
 
       final response = await database.listDocuments(
-          databaseId: '656887e4a140c5a4eb53',
-          collectionId: '656887ea72cb5e633298',
+          databaseId: '67010e94000721dbfcfe',
+          collectionId: '67010ecb00190ecf3a6a',
           queries: [querys]);
 
       final documentData = response.documents;
@@ -163,8 +163,8 @@ class AppWriteAuthController extends GetxController {
   Future<bool> deleteNote(String docsId, String noteId) async {
     try {
       await database.deleteDocument(
-          databaseId: '656887e4a140c5a4eb53',
-          collectionId: '656887ea72cb5e633298',
+          databaseId: '67010e94000721dbfcfe',
+          collectionId: '67010ecb00190ecf3a6a',
           documentId: docsId);
       notes.removeWhere((note) => note.docsId == noteId);
       await fetchNotesAfterAdd(noteId);
@@ -186,8 +186,8 @@ class AppWriteAuthController extends GetxController {
 
       if (title.isNotEmpty && content.isNotEmpty) {
         await database.updateDocument(
-          databaseId: '656887e4a140c5a4eb53',
-          collectionId: '656887ea72cb5e633298',
+          databaseId: '67010e94000721dbfcfe',
+          collectionId: '67010ecb00190ecf3a6a',
           documentId: documentId,
           data: {
             'title': title,
