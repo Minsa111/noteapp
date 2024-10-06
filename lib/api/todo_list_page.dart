@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 class TodoList extends StatefulWidget {
-  const TodoList({super.key});
-
   @override
   State<TodoList> createState() => _TodoListState();
 }
@@ -23,11 +21,11 @@ class _TodoListState extends State<TodoList> {
         body: Column(
           children: [
             TextField(
-              key: const Key('textfield'), // Adding a key to the TextField
+              key: Key('textfield'), // Adding a key to the TextField
               controller: controller,
             ),
             TextField(
-              key: const Key('textfield'), // Adding a key to the TextField
+              key: Key('textfield'), // Adding a key to the TextField
               controller: texts,
             ),
             Expanded(

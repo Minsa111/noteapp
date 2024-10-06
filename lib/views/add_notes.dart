@@ -78,8 +78,8 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                   ),
                   style: ButtonStyle(
                     backgroundColor:
-                        WidgetStateProperty.all<Color>(Colors.grey.shade800),
-                    elevation: WidgetStateProperty.all<double>(8.0),
+                        MaterialStateProperty.all<Color>(Colors.grey.shade800),
+                    elevation: MaterialStateProperty.all<double>(8.0),
                   ),
                 ),
                 IconButton(

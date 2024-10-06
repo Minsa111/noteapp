@@ -8,7 +8,7 @@ import 'package:noteapp/controller/appwritecontroller.dart';
 import 'signup.dart'; // Import the SignUpScreen
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

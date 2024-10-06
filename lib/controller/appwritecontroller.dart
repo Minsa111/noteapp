@@ -9,7 +9,7 @@ import 'package:uuid/uuid.dart';
 
 final client = Client()
     .setEndpoint('https://cloud.appwrite.io/v1')
-    .setProject('67010bca000018600a19');
+    .setProject('65631c1398656071fe82');
 
 final account = Account(client);
 final database = Databases(client);
@@ -55,7 +55,7 @@ class AppWriteAuthController extends GetxController {
 
   Future<bool> signIn(String email, String password) async {
     try {
-      final response = await account.createEmailPasswordSession(
+      final response = await account.createEmailSession(
         email: email,
         password: password,
       );
